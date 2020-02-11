@@ -1,0 +1,59 @@
+<!-- 
+    Author: Graham Atlee
+
+    This file loads all of our user posts from the backend 
+ -->
+ {% extends "layout.html"%}
+
+ {% block content %}
+    <div class="media" style="padding-bottom: 10px;">
+        <img src="{{ url_for('static', filename='/profile_pics/' + user.image_file ) }}" class="rounded" alt="..."
+            width="64" height="64">
+        <div class="media-body" id="user-info">
+        <h4 class="mt-0">{{ user.fullname }}</h4>
+        </div>
+    </div>
+
+    <h6 style="padding-bottom: 10px;">
+        {{ user.fullname }}'s Job Postings ({{ posts.total }}):
+    </h6>
+
+     {% for post in posts.items %}
+         <div id="post-card" class="card w-75">
+             <div class="card-body">
+ 
+             <!-- Profile Pic, Fullname, Datetime -->
+             <div class="d-flex flex-row bd-highlight mb-3">
+                 <!-- Profile Pic -->
+                 <img src="{{ url_for('static', filename='/profile_pics/' + post.author.image_file ) }}" alt=""
+                 class="rounded" height="32" width="32">
+                 <!-- Fullname -->
+                 <small class="card-text" style="padding-left: 5px;">{{ post.author['fullname'] }} 
+                 {{ post.date_posted.strftime('%-I:%-M %p • %b %-d, %Y') }}</small>
+ 
+             </div>
+ 
+             <h4 class="card-title">{{ post.title }}</h4>
+             
+             <p class="card-text">{{ post.content }}</p>
+             <p class="card-text"><b>Payment:</b> {{ post.payment }}</p>
+             <a id="read-more" href="{{ url_for('post', post_id=post.id) }}" class="btn btn-outline-primary">Read More</a>
+             </div>
+         </div>
+ 
+     {% endfor %}
+ 
+     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+     {% if page_num %}
+       {% if posts.page == page_num %}
+         <a class="btn btn-info mb-4" href="{{ url_for('user_posts', fullname=user.fullname, page=page_num) }}">{{ page_num }}</a>
+       {% else %}
+         <a class="btn btn-outline-info mb-4" href="{{ url_for('user_posts',fullname=user.fullname, page=page_num) }}">{{ page_num }}</a>
+       {% endif %}
+     {% else %}
+       ...
+     {% endif %}
+   {% endfor %}
+ 
+ 
+ {% endblock content %}

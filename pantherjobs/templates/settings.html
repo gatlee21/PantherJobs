@@ -1,0 +1,117 @@
+<!-- 
+    Author: Graham Atlee
+
+    Account settings page 
+
+ -->
+ {% extends "layout.html" %}
+ {% block content %}
+ 
+     <link rel="stylesheet" href="{{ url_for('static', filename='log-reg-style.css')}}">
+     <div class="container">
+ 
+         <div id="page-heading">
+             <h1>Settings</h1>
+             <h5>Update your account info</h5>
+         </div>
+ 
+         <!-- Post Method Fields -->
+         <form method="POST" action="" enctype="multipart/form-data">
+             {{ form.hidden_tag() }}
+ 
+               
+ 
+                <!-- Full Name Field -->
+                <div class="form-group">
+                    {{ form.fullname.label(class="form-control-label") }}
+                         
+                    <!-- If there are user input errors we make it known to user -->
+                    {% if form.fullname.errors %}
+                        {{ form.fullname(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.fullname.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.fullname(class="form-control")}}
+                    {% endif %}
+ 
+                </div>
+ 
+ 
+                 <!-- Email Field -->
+                 <div class="form-group">
+                     {{ form.email.label(class="form-control-label") }}
+ 
+                     <!-- If there are user input errors we make it known to user -->
+                     {% if form.email.errors %}
+                     {{ form.email(class="form-control is-invalid") }}
+ 
+                     <div class="invalid-feedback">
+                         {% for error in form.email.errors %}
+                             <span>{{ error }}</span>
+                         {% endfor %}
+                     </div>
+                 {% else %}
+                     {{ form.email(class="form-control")}}
+                 {% endif %}
+ 
+                 </div>
+
+                <!-- Update Profile Pic Field  -->
+                 <div class="form-group">
+                    {{ form.profile_pic.label() }}
+                    {{ form.profile_pic(class="form-control-file") }}
+
+                    <!-- If errors print them -->
+                    {% if form.profile_pic.errors %}
+                        {% for error in form.profile_pic.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                 </div>
+                 
+                 <!-- Submit Field -->
+                 <div class="form-group">
+                     {{ form.submit(class="btn btn-primary") }}
+                     <!-- <a href="{{ url_for('account') }}">
+                        <button class="btn btn-secondary">Cancel</button>
+                     </a> -->
+                 </div>
+
+            <!-- Delete Account Field -->
+
+                  <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop">
+                Delete Account 
+            </button>
+        
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Delete Post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        <div class="modal-body">
+                        Are you sure want to delete your account? 
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ url_for('delete_user', fullname=form.fullname.data) }}" method="POST">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+    </div>
+         </form>
+     </div>
+ 
+ 
+ {% endblock content %}

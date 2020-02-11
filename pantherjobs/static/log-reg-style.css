@@ -1,0 +1,14 @@
+/* 
+    Author: Graham Atlee
+
+    This file will maintain the styling for the 
+    login and registeration forms 
+*/
+
+#page-heading{
+    padding-bottom: 25px;
+}
+
+#lastname-field{
+    padding-left: 10px;
+}

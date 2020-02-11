@@ -1,0 +1,149 @@
+<!-- 
+    Author: Graham Atlee
+
+    Login page 
+
+ -->
+ {% extends "layout.html" %}
+ {% block content %}
+ 
+     <link rel="stylesheet" href="{{ url_for('static', filename='log-reg-style.css')}}">
+     <div class="container">
+ 
+        <div id="page-heading">
+            <h1>{{ legend }}</h1>
+            {% if legend == 'Post a Student Job' %}
+            <h5>Please fill out the following forms to post a student job</h5>
+            {% endif %}
+        </div>
+
+    
+         <!-- Post Method Fields -->
+         <form method="POST" action="">
+             {{ form.hidden_tag() }}
+
+                 <!-- Job Title Field -->
+                 <div class="form-group">
+                    {{ form.title.label(class="form-control-label") }}
+
+                    <!-- If there are user input errors we make it known to user -->
+                    {% if form.title.errors %}
+                    {{ form.title(class="form-control is-invalid") }}
+
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title(class="form-control", placeholder="Enter a Job Title")}}
+                {% endif %}
+
+                </div>
+
+                 <!-- Content Field -->
+                 <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+
+                    <!-- If there are user input errors we make it known to user -->
+                    {% if form.content.errors %}
+                    {{ form.content(class="form-control is-invalid") }}
+
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class="form-control", placeholder="Write out a job description")}}
+                {% endif %}
+
+                </div>
+ 
+ 
+                 <!-- Job Time Frame Field -->
+                 <div class="form-group">
+                     {{ form.job_timeframe.label(class="form-control-label") }}
+ 
+                     <!-- If there are user input errors we make it known to user -->
+                     {% if form.job_timeframe.errors %}
+                     {{ form.job_timeframe(class="form-control is-invalid") }}
+ 
+                     <div class="invalid-feedback">
+                         {% for error in form.email.errors %}
+                             <span>{{ error }}</span>
+                         {% endfor %}
+                     </div>
+                 {% else %}
+                     {{ form.job_timeframe(class="form-control", placeholder="Enter a time frame (ex. 1-2 weeks)")}}
+                 {% endif %}
+ 
+                 </div>
+ 
+                 <!-- Payment Field -->
+                 <div class="form-group">
+                     {{ form.payment.label(class="form-control-label") }}
+                 
+                      <!-- If there are user input errors we make it known to user -->
+                      {% if form.payment.errors %}
+                      {{ form.payment(class="form-control is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.payment.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.payment(class="form-control", placeholder="Enter Payment Details")}}
+                  {% endif %}
+ 
+                 </div>
+
+                 <h4>Contact Details:</h4>
+
+                  <!-- Email Field -->
+                  <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                
+                     <!-- If there are user input errors we make it known to user -->
+                     {% if form.email.errors %}
+                     {{ form.email(class="form-control is-invalid") }}
+                     <div class="invalid-feedback">
+                         {% for error in form.email.errors %}
+                             <span>{{ error }}</span>
+                         {% endfor %}
+                     </div>
+                 {% else %}
+                     {{ form.email(class="form-control", placeholder="Enter Payment Details")}}
+                 {% endif %}
+
+                </div>
+
+                 <!-- Phone Field -->
+                 <div class="form-group">
+                    {{ form.phone.label(class="form-control-label") }}
+                
+                     <!-- If there are user input errors we make it known to user -->
+                     {% if form.phone.errors %}
+                     {{ form.phone(class="form-control is-invalid") }}
+                     <div class="invalid-feedback">
+                         {% for error in form.phone.errors %}
+                             <span>{{ error }}</span>
+                         {% endfor %}
+                     </div>
+                 {% else %}
+                     {{ form.phone(class="form-control", placeholder="Enter Payment Details")}}
+                 {% endif %}
+
+                </div>
+
+              
+                 <!-- Submit Field -->
+                 <div class="form-group">
+                     {{ form.submit(class="btn btn-outline-primary", id="form-button") }}
+                 </div>
+
+         </form>
+     </div>
+  
+ 
+ {% endblock content %}

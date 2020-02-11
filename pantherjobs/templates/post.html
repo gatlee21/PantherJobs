@@ -1,0 +1,72 @@
+<!-- 
+    Author: Graham Atlee
+
+    This page will expand the post in full detail
+ -->
+ {% extends "layout.html"%}
+
+{% block content %}
+    <h3 style="padding-bottom: 15px;">{{ post.title }}</h3>
+    <div class="d-flex flex-row bd-highlight mb-3">
+        <!-- Profile Pic -->
+        <img src="{{ url_for('static', filename='/profile_pics/' + post.author.image_file ) }}" alt=""
+        class="rounded" height="32" width="32">
+        <!-- Fullname -->
+        <h6 class="card-text" style="padding-left: 5px;">
+            <a href="{{ url_for('user_posts', fullname=post.author.fullname) }}">{{ post.author['fullname'] }} </a>
+            {{ post.date_posted.strftime('%-I:%M %p • %b %-d, %Y') }}
+        </h6>
+
+    </div>
+        <p><b>Description of Job:</b></p>
+        <p>{{ post.content }}</p>
+    <div>
+
+    <div>
+        <p><b>Payment Details:</b> {{ post.payment }}</p>
+    </div>
+
+    <h4>Contact Details:</h4>
+
+    <p><b>Email:</b> {{ post.email }} </p>
+    <p><b>Phone:</b> {{ post.phone }} </p>
+
+    </div>
+
+    {% if post.author == current_user %}
+    <div class="d-flex flex-row bd-highlight mb-3">
+
+            <a href="{{ url_for('update_post', post_id=post.id) }}"  class="btn btn-info" style="margin-right: 10px;">Edit</a>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop">
+                Delete Post 
+            </button>
+        
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Delete Post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        <div class="modal-body">
+                        Are you sure want to delete this job posting? 
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+    </div>
+
+    {% endif %}
+
+{% endblock content %}

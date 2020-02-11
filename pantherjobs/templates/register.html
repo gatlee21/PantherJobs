@@ -1,0 +1,117 @@
+<!-- 
+    Author: Graham Atlee
+
+    Registeration page 
+
+ -->
+{% extends "layout.html" %}
+{% block content %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='log-reg-style.css')}}">
+    <div class="container">
+
+        <div id="page-heading">
+            <h1>Sign Up</h1>
+            <h5>Sign up with an account to start posting jobs</h5>
+        </div>
+
+        <!-- Post Method Fields -->
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+                <!-- Full Name Field -->
+                <div class="form-group">
+                    {{ form.fullname.label(class="form-control-label") }}
+                        
+                    <!-- If there are user input errors we make it known to user -->
+                    {% if form.fullname.errors %}
+                        {{ form.fullname(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.fullname.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.fullname(class="form-control", placeholder="Enter Full Name")}}
+                    {% endif %}
+
+                </div>
+
+                    
+                
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+
+                    <!-- If there are user input errors we make it known to user -->
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control is-invalid") }}
+
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control", placeholder="Enter Email")}}
+                {% endif %}
+
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                
+                     <!-- If there are user input errors we make it known to user -->
+                     {% if form.password.errors %}
+                     {{ form.password(class="form-control is-invalid") }}
+                     <div class="invalid-feedback">
+                         {% for error in form.password.errors %}
+                             <span>{{ error }}</span>
+                         {% endfor %}
+                     </div>
+                 {% else %}
+                     {{ form.password(class="form-control", placeholder="Enter a Password")}}
+                 {% endif %}
+
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                      <!-- If there are user input errors we make it known to user -->
+                      {% if form.confirm_password.errors %}
+                      {{ form.confirm_password(class="form-control is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.confirm_password.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.confirm_password(class="form-control", placeholder="Confirm Password")}}
+                  {% endif %}
+
+                </div>
+
+                <!-- <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div> -->
+                
+                <!-- Submit Field -->
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-primary", id="form-button") }}
+                </div>
+        </form>
+    </div>
+
+    <!-- Link to login field -->
+    <div>
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+        </small>
+    </div>
+
+
+{% endblock content %}

@@ -1,0 +1,88 @@
+<!-- 
+    Author: Graham Atlee
+
+    Login page 
+
+ -->
+ {% extends "layout.html" %}
+ {% block content %}
+ 
+     <link rel="stylesheet" href="{{ url_for('static', filename='log-reg-style.css')}}">
+     <div class="container">
+ 
+        <div id="page-heading">
+            <h1>Log In</h1>
+            <h5>Welcome back log in to check for jobs or to start posting</h5>
+        </div>
+
+    
+         <!-- Post Method Fields -->
+         <form method="POST" action="">
+             {{ form.hidden_tag() }}
+ 
+ 
+                 <!-- Email Field -->
+                 <div class="form-group">
+                     {{ form.email.label(class="form-control-label") }}
+ 
+                     <!-- If there are user input errors we make it known to user -->
+                     {% if form.email.errors %}
+                     {{ form.email(class="form-control is-invalid") }}
+ 
+                     <div class="invalid-feedback">
+                         {% for error in form.email.errors %}
+                             <span>{{ error }}</span>
+                         {% endfor %}
+                     </div>
+                 {% else %}
+                     {{ form.email(class="form-control", placeholder="Enter Your Email")}}
+                 {% endif %}
+ 
+                 </div>
+ 
+                 <!-- Password Field -->
+                 <div class="form-group">
+                     {{ form.password.label(class="form-control-label") }}
+                 
+                      <!-- If there are user input errors we make it known to user -->
+                      {% if form.password.errors %}
+                      {{ form.password(class="form-control is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.password.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.password(class="form-control", placeholder="Enter Password")}}
+                  {% endif %}
+ 
+                 </div>
+ 
+                 <!-- Remember Me Field -->
+                 <div class="form-check">
+                     {{ form.remember(class="form-check-input") }}
+                     {{ form.remember.label(class="form-check-label") }}
+                 </div>
+                 
+                 <!-- Submit Field -->
+                 <div class="form-group">
+                     {{ form.submit(class="btn btn-outline-primary", id="form-button") }}
+                 </div>
+
+                <!-- Password Reset Link -->
+                 <small class="text-muted ml-2">
+                     <a href="{{ url_for('reset_request') }}">Forgot Password?</a>
+                 </small>
+         </form>
+     </div>
+ 
+     <!-- Link to Sign Up -->
+     <div>
+         <small class="text-muted">
+            Need an Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Here</a>
+         </small>
+     </div>
+
+ 
+ 
+ {% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content%}
+    
+    <!-- <h1>{{ current_user.fullname }}</h1> -->
+    <div class="media">
+        <img src="{{ image_file }}" class="rounded" alt="..."
+             width="64" height="64">
+        <div class="media-body" id="user-info">
+          <h4 class="mt-0">{{ current_user.fullname }}</h4>
+          {{ current_user.email }}
+        </div>
+        <a href="{{ url_for('settings') }}">
+            <button class="btn btn-secondary">Settings</button>
+         </a>
+      </div>
+{% endblock %}

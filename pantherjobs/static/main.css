@@ -1,0 +1,43 @@
+#nav-bar{
+    background-color:#422f89;
+}
+
+#nav-bar a{
+    color: white;
+}
+
+#post-card{
+   margin-bottom: 25px;
+}
+
+.container{
+    padding-top: 50px;
+    /* padding-left: 100px; */
+    /* text-align: center; */
+}
+
+#read-more{
+    border-color: #422f89;
+    color: #422f89;
+}
+
+
+#read-more:hover{
+    background-color: #422f89;
+    color: white;
+}
+
+#form-button{
+    border-color: #422f89;
+    color: #422f89;
+}
+
+
+#form-button:hover{
+    background-color: #422f89;
+    color: white;
+}
+
+#user-info{
+    padding-left: 20px;
+}
